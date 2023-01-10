@@ -10,7 +10,7 @@
 
 <div>
   <div>
-      <a href="<%= new_movie_path %>">Add a new movie</a>
+      <%= link_to "Add a new movie", new_movie_path %>
 
     <form action="/movies" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
@@ -102,9 +102,7 @@
         </td>
 
         <td>
-          <a href="<%= movie_path(a_movie.id) %>">
-            Show details
-          </a>
+        <%= link_to "Show details", a_movie %>
         </td>
       </tr>
       <% end %>

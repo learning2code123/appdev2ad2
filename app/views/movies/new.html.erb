@@ -6,13 +6,13 @@
   <%= form_with(url: movies_path) do %>
      
       <div>
-      <%= label_tag :title, "Tiltle" %>
-      <%= text_field_tag :title, @movie.title %>
+      <%= label_tag :title, "Title" %>
+      <%= text_field_tag "movie[title]", @movie.title %>
       </div>
 
       <div>
       <%= label_tag :description, "Description" %>
-      <%= text_area_tag :description, @movie.description, rows: 3 %>
+      <%= text_area_tag "movie[description]", @movie.description, rows: 3 %>
       </div>
 
      <%#  <div>

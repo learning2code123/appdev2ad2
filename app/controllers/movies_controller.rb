@@ -38,7 +38,7 @@ class MoviesController < ApplicationController
 
     if the_movie.valid?
       @the_movie.save
-      redirect_to("/movies", { :notice => "Movie created successfully." })
+      redirect_to movies_url, notice: "Movie created successfully." 
     else
       #cookies[:title] = params.fetch("query_title")
       #cookies[:description] = params.fetch("query_description")
@@ -60,9 +60,9 @@ class MoviesController < ApplicationController
 
     if the_movie.valid?
       the_movie.save
-      redirect_to("/movies/#{the_movie.id}", { :notice => "Movie updated successfully."} )
+      redirect_to movie_url(the_movie), notice: "Movie updated successfully."
     else
-      redirect_to("/movies/#{the_movie.id}", { :alert => the_movie.errors.full_messages.to_sentence })
+      redirect_to movie_url(the_movie), alert: the_movie.errors.full_messages.to_sentence 
     end
   end
 
@@ -72,6 +72,6 @@ class MoviesController < ApplicationController
 
     the_movie.destroy
 
-    redirect_to("/movies", { :notice => "Movie deleted successfully."} )
+    redirect_to movies_url, notice: "Movie deleted successfully."
   end
 end

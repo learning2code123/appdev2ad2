@@ -3,7 +3,7 @@
       Add a new movie
     </h2>
 
-    <form action="/movies" method="post">
+    <form action="<%= movies_path %>" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
       <div>
         <label for="title_box">

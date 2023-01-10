@@ -2,22 +2,19 @@ class MoviesController < ApplicationController
   
   def new
     @the_movie = Movie.new
-    
-    render template: "movies/new.html.erb"
   end
-
-  def edit
-    @the_movie = Movie.where(id: params.fetch(:id)).first
-    render template: "movies/edit.html.erb"
-  end
-
   
   def index
     matching_movies = Movie.all
 
     @list_of_movies = matching_movies.order({ :created_at => :desc })
 
-    render({ :template => "movies/index.html.erb" })
+    respond_to do |format|
+      format.json do
+        render json: @list_of_movies
+      end
+      format.html
+    end
   end
 
   def show
@@ -26,8 +23,6 @@ class MoviesController < ApplicationController
     matching_movies = Movie.where({ :id => the_id })
 
     @the_movie = matching_movies[0]
-
-    render({ :template => "movies/show.html.erb" })
   end
 
   def create
@@ -45,9 +40,15 @@ class MoviesController < ApplicationController
       #cookies[:released] = params.fetch("query_released")
       #redirect_to("/movies/new", { :alert => the_movie.errors.full_messages.to_sentence })
 
-      render template: "movies/new"
+      render "new"
 
     end
+  end
+
+  def edit
+    the_id = params.fetch(:id)
+    @matching_movies = Movie.where({ :id => the_id })
+    @the_movie = matching_movies.first
   end
 
   def update

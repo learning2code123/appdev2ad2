@@ -4,41 +4,31 @@
       Edit movie
     </h2>
 
-    <form action="<%= movie_path(@the_movie) %>"  method="post" >
-   
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
+    <% @the_movie.errors.full_messages.each do |message| %>
+    <p style="color: red;"><%= message %></p>
+    <% end %>
 
-    <input type="hidden" name="_method" value="patch">
+    <%= form_with(url: movie_path(@the_movie), method: :patch) do %>
 
-      <div>
-        <label for="title_box">
-          Title
-        </label>
-
-        <input type="text" id="title_box" name="query_title" value="<%= @the_movie.title %>">
+    <div>
+      <%= label_tag :title_box, "Tiltle" %>
+      <%= text_field_tag :query_title, @the_movie.title, id: "title_box" %>
       </div>
 
       <div>
-        <label for="description_box">
-          Description
-        </label>
-
-        <textarea id="description_box" name="query_description"><%= @the_movie.description %></textarea>
+      <%= label_tag :description_box, "Description" %>
+      <%= text_area_tag :query_description, @the_movie.description, id: "description_box", rows: 3 %>
       </div>
 
-      <div>
-        <input type="checkbox" id="released_box" name="query_released" value="1" <%= "checked" if @the_movie.released %>>
+     <%#  <div>
+        <input type="checkbox" id="released_box" name="query_released" value="1">
 
-        <label for="released_box">
-            Released
-        </label>
+        <label for="released_box">Released</label>
       </div>
+      %>
 
-      <button>
-        Update movie
-      </button>
+      <%= button_tag "Update movie" %>
+
     </form>
   </div>
-</div>
-
-<hr>
+    <% end %>

@@ -47,7 +47,7 @@ class MoviesController < ApplicationController
 
   def edit
     the_id = params.fetch(:id)
-    @matching_movies = Movie.where({ :id => the_id })
+    matching_movies = Movie.where({ :id => the_id })
     @the_movie = matching_movies.first
   end
 

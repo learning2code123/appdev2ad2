@@ -3,16 +3,19 @@
       New movie
     </h2>
 
-  <%= form_with(url: movies_path) do %>
+  <%#= form_with(url: movies_path) do %>
+    <%# end  %>
+
+  <%= form_with(model: @movie) do |form| %>
      
       <div>
-      <%= label_tag :title, "Title" %>
-      <%= text_field_tag "movie[title]", @movie.title %>
+      <%= form.label :title %>
+      <%= form.text_field :title#"movie[title]", @movie.title %>
       </div>
 
       <div>
-      <%= label_tag :description, "Description" %>
-      <%= text_area_tag "movie[description]", @movie.description, rows: 3 %>
+      <%= label :description %>
+      <%= text_area :description, rows: 3 %>
       </div>
 
      <%#  <div>
@@ -22,7 +25,7 @@
       </div>
       %>
 
-      <%= button_tag "Create movie" %>
+      <%= form.button %>
 
     </form>
   </div>
